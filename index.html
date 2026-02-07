@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olaniran Bolaji | Creative Developer</title>
+    <title>Bolaji Olaniran | Creative Developer</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
     <style>
@@ -58,7 +58,7 @@
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-main); font-family: monospace; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-main); font-family: monospace; letter-spacing: 2px; }
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.3s; }
         .nav-links a:hover { color: var(--accent); }
@@ -85,7 +85,8 @@
         }
         .falling-icon {
             position: absolute; top: -50px;
-            color: rgba(255,255,255,0.1); font-size: 2rem;
+            color: rgba(255,255,255,0.3); /* Base opacity increased */
+            font-size: 2rem;
             animation: fall linear infinite;
         }
         @keyframes fall {
@@ -168,7 +169,7 @@
     <div id="cursor-dot"></div>
 
     <nav>
-        <div class="logo">B.</div>
+        <div class="logo">BO</div>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
@@ -181,7 +182,7 @@
         
         <section id="home" class="hero">
             <div class="falling-container" id="falling-icons"></div>
-            <h1>Hi, I'm <br>Olaniran Bolaji.</h1>
+            <h1>Hi, I'm <br>Bolaji Olaniran.</h1>
             <p>A Professional Software Engineer</p>
         </section>
 
@@ -190,7 +191,7 @@
             <div class="about-grid">
                 <div>
                     <p style="color: var(--text-muted); margin-bottom: 20px;">
-                        Hi there! I'm Olaniran Bolaji, a web developer and graphics designer passionate about creating interactive digital experiences and delivering polished, user-centric solutions. I specialize in building responsive websites and web applications that are both visually appealing and highly functional.
+                        Hi there! I'm Bolaji Olaniran, a web developer and graphics designer passionate about creating interactive digital experiences and delivering polished, user-centric solutions. I specialize in building responsive websites and web applications that are both visually appealing and highly functional.
                     </p>
                     <p style="color: var(--text-muted);">
                         I pay close attention to detail and enjoy collaborating with clients — transforming their ideas into digital products that drive engagement and deliver results.
@@ -288,7 +289,7 @@
         </section>
 
         <footer style="padding-bottom: 50px;">
-            <div class="big-name">OLANIRAN<br>BOLAJI</div>
+            <div class="big-name">BOLAJI<br>OLANIRAN</div>
             <div class="socials">
                 <a href="#" class="social-link"><i class="ri-twitter-x-fill"></i></a>
                 <a href="#" class="social-link"><i class="ri-linkedin-fill"></i></a>
@@ -296,7 +297,7 @@
                 <a href="#" class="social-link"><i class="ri-instagram-fill"></i></a>
             </div>
             <p style="text-align: center; color: rgba(255,255,255,0.2); margin-top: 30px; font-size: 0.8rem;">
-                © 2026 | Olaniran Bolaji
+                © 2026 | Bolaji Olaniran
             </p>
         </footer>
 
@@ -314,7 +315,7 @@
             dot.style.top = `${e.clientY}px`;
         });
 
-        // 2. FALLING LOGOS (The "X" effect but with your stack)
+        // 2. FALLING LOGOS
         const icons = [
             'ri-reactjs-line', 'ri-html5-fill', 'ri-css3-fill', 
             'ri-javascript-fill', 'ri-github-fill', 'ri-git-merge-line', 
@@ -327,7 +328,12 @@
             el.className = `falling-icon ${icons[Math.floor(Math.random() * icons.length)]}`;
             el.style.left = Math.random() * 100 + 'vw';
             el.style.animationDuration = Math.random() * 3 + 4 + 's'; // 4-7 seconds
-            el.style.opacity = Math.random() * 0.3 + 0.1; // faint
+            
+            // INCREASED VISIBILITY HERE
+            // Previously: Math.random() * 0.3 + 0.1 (Max 0.4)
+            // Now: Math.random() * 0.4 + 0.3 (Max 0.7 - much brighter)
+            el.style.opacity = Math.random() * 0.4 + 0.3; 
+            
             el.style.fontSize = Math.random() * 20 + 20 + 'px'; // 20-40px
             
             container.appendChild(el);
