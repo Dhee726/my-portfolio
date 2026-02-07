@@ -3,214 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olaniran Bolaji Oluwanifemi | Portfolio</title>
+    <title>Olaniran Bolaji | Creative Developer</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            --bg: #030712;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8; /* Cyan blue */
+            --cursor-size: 400px;
         }
+
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Hide default cursor */ }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            line-height: 1.6;
-            color: var(--dark);
-            background: var(--light);
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, sans-serif;
             overflow-x: hidden;
+            line-height: 1.5;
         }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Animation Keyframes */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* THE SPOTLIGHT EFFECT (The "Mind-Blowing" part) */
+        #spotlight {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(
+                var(--cursor-size) circle at var(--x, 50%) var(--y, 50%), 
+                rgba(56, 189, 248, 0.15), 
+                transparent 40%
+            );
+            transition: opacity 0.3s;
         }
 
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
+        /* CUSTOM CURSOR DOT */
+        #cursor-dot {
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            pointer-events: none;
         }
 
-        /* Hero Section */
-        header { padding: 100px 0; }
-        
-        .tag { 
-            display: inline-block; 
-            background: #e0e7ff; 
-            color: var(--primary); 
-            padding: 5px 12px; 
-            border-radius: 20px; 
-            font-size: 0.9rem; 
-            font-weight: 600; 
+        /* BACKGROUND GRID (The "Lando" technical feel) */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* LAYOUT */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HERO SECTION */
+        header {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 1.1rem;
             margin-bottom: 20px;
-            opacity: 0;
-            animation: slideInLeft 0.8s ease-out forwards 0.2s;
+            letter-spacing: 2px;
         }
 
-        h1 { 
-            font-size: 3.5rem; 
-            margin: 0 0 15px 0; 
-            line-height: 1.1; 
-            background: -webkit-linear-gradient(#0f172a, #334155);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards 0.4s;
-        }
-
-        .name-highlight {
-            color: var(--primary);
-            background: var(--gradient);
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem); /* Responsive massive text */
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle { 
-            font-size: 1.3rem; 
-            color: var(--gray); 
-            font-weight: 400; 
+        .bio {
+            font-size: 1.25rem;
+            color: var(--text-muted);
             max-width: 600px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards 0.6s;
+            margin-bottom: 50px;
         }
 
-        .btn {
-            display: inline-block;
-            background: var(--dark);
-            color: white;
-            padding: 12px 28px;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 30px;
-            font-size: 1rem;
+        /* PROJECTS GRID */
+        .section-header {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding-bottom: 100px;
+        }
+
+        /* GLASS CARDS (The "Slush" feel) */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 40px;
             transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards 0.8s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-            background: var(--primary);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            display: block;
         }
 
-        /* Projects Section */
-        .section-title { 
-            font-size: 2rem; 
-            margin-top: 80px; 
-            border-bottom: 2px solid #e2e8f0; 
-            padding-bottom: 10px; 
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards 1s;
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .project-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 35px;
-            margin-top: 30px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards 1.2s;
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+
+        .tags { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tag {
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            font-family: monospace;
+        }
+
+        .arrow { font-size: 1.2rem; transition: transform 0.3s; }
+        .card:hover .arrow { transform: translate(5px, -5px); }
+
+        /* CONTACT BUTTON */
+        .btn-glow {
+            display: inline-block;
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: var(--primary);
+        .btn-glow:hover {
+            background: rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
         }
 
-        /* A subtle line decoration on hover */
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--primary);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover::before {
-            transform: scaleY(1);
-        }
-
-        .project-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;}
-        .project-title { margin: 0; font-size: 1.6rem; color: var(--dark); }
-        
-        .project-tech { 
-            color: var(--primary); 
-            font-size: 0.85rem; 
-            font-weight: 600; 
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-top: 8px;
-        }
-
-        .card-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 20px;
-            display: inline-block;
-        }
-        
-        .card-link:hover { text-decoration: underline; }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            header { padding: 60px 0; }
+        @media (max-width: 768px) {
+            * { cursor: auto !important; } /* Restore cursor on mobile */
+            #spotlight, #cursor-dot { display: none; }
         }
     </style>
 </head>
 <body>
 
+    <div class="grid-bg"></div>
+    <div id="spotlight"></div>
+    <div id="cursor-dot"></div>
+
     <div class="container">
         <header>
-            <span class="tag">Available for work</span>
-            <h1>Hello, I'm <br><span class="name-highlight">Olaniran Bolaji.</span></h1>
-            <p class="subtitle">Full-Stack Web Developer & WebView Specialist.<br>I build high-performance web applications and convert them into seamless mobile experiences.</p>
-            <a href="mailto:divinew423@gmail.com" class="btn">Let's Talk</a>
+            <p class="eyebrow">PORTFOLIO 2026</p>
+            <h1>Olaniran Bolaji<br>Oluwanifemi.</h1>
+            <p class="bio">
+                I engineer high-performance web applications and transform them into native mobile experiences. 
+                Specializing in bridging the gap between <span style="color:white">Web</span> and <span style="color:white">App</span> environments.
+            </p>
+            <a href="mailto:divinew423@gmail.com" class="btn-glow">Initiate Collaboration</a>
         </header>
 
-        <h2 class="section-title">Selected Projects</h2>
+        <section id="work">
+            <h2 class="section-header">Selected Works</h2>
+            
+            <div class="project-grid">
+                <a href="#" class="card">
+                    <h3>Niyot Confectioneries <span class="arrow">↗</span></h3>
+                    <p>A full-stack digital commerce platform for a bakery brand. Engineered the web architecture and deployed a custom WebView wrapper for native mobile access.</p>
+                    <div class="tags">
+                        <span class="tag">WebView</span>
+                        <span class="tag">eCommerce</span>
+                        <span class="tag">System Design</span>
+                    </div>
+                </a>
 
-        <div class="project-card">
-            <div class="project-header">
-                <div>
-                    <h3 class="project-title">Niyot Confectioneries</h3>
-                    <p class="project-tech">HTML • CSS • WebView App</p>
-                </div>
+                <a href="#" class="card">
+                    <h3>Bakery OS <span class="arrow">↗</span></h3>
+                    <p>Internal inventory and order management system. Optimized for tablet touch interfaces with local-first data persistence.</p>
+                    <div class="tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Dashboard</span>
+                        <span class="tag">LocalStorage</span>
+                    </div>
+                </a>
+
+                <a href="#" class="card">
+                    <h3>Portfolio v1 <span class="arrow">↗</span></h3>
+                    <p>This website. Built with raw performance in mind, utilizing hardware-accelerated CSS and vanilla JavaScript for interaction.</p>
+                    <div class="tags">
+                        <span class="tag">Design</span>
+                        <span class="tag">Animation</span>
+                        <span class="tag">Vercel</span>
+                    </div>
+                </a>
             </div>
-            <p>A full digital ecosystem for a bakery brand. I developed the responsive e-commerce website and engineered a WebView wrapper to deploy it as a native mobile application. Features include a dynamic menu for cakes, breads, and pastries.</p>
-            <a href="#" class="card-link">View Details &rarr;</a>
-        </div>
+        </section>
 
-        <div class="project-card" style="animation-delay: 1.4s;">
-            <div class="project-header">
-                <div>
-                    <h3 class="project-title">Bakery Management System</h3>
-                    <p class="project-tech">Javascript • LocalStorage</p>
-                </div>
-            </div>
-            <p>An internal tool designed to help manage inventory and orders for Niyot Confectioneries. Optimized for speed and ease of use on tablet devices.</p>
-        </div>
-
-        <footer style="margin-top: 100px; padding-bottom: 40px; color: var(--gray); font-size: 0.9rem; opacity: 0; animation: fadeInUp 0.8s ease-out forwards 1.6s;">
-            <p>© 2026 Olaniran Bolaji Oluwanifemi. All rights reserved.</p>
+        <footer style="padding: 50px 0; color: var(--text-muted); font-size: 0.9rem;">
+            <p>Designed & Engineered in Lagos. © 2026.</p>
         </footer>
     </div>
 
+    <script>
+        // THE JAVASCRIPT ENGINE FOR THE EFFECTS
+        const spotlight = document.getElementById('spotlight');
+        const dot = document.getElementById('cursor-dot');
+
+        window.addEventListener('mousemove', e => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Move the spotlight (smooth radial gradient)
+            spotlight.style.setProperty('--x', `${x}px`);
+            spotlight.style.setProperty('--y', `${y}px`);
+
+            // Move the physical dot cursor
+            dot.style.left = `${x}px`;
+            dot.style.top = `${y}px`;
+        });
+
+        // Add hover effect to cards to snap spotlight
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(2.5)';
+                dot.style.backgroundColor = 'transparent';
+                dot.style.border = '1px solid var(--accent)';
+            });
+            el.addEventListener('mouseleave', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                dot.style.backgroundColor = 'var(--accent)';
+                dot.style.border = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
